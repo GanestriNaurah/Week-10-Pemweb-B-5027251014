@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lembar – Toko Buku</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a class="logo" href="#" aria-label="Lembar, beranda">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <rect x="3" y="4" width="8" height="20" rx="2" fill="#FF8A4C"/>
+        <rect x="11" y="2" width="8" height="22" rx="2" fill="#1D1B4C"/>
+        <rect x="19" y="6" width="6" height="18" rx="2" fill="#A8EBCB" transform="rotate(8 22 15)"/>
+      </svg>
+      lembar
+    </a>
+    <label class="search">
+      <span class="sr-only">Cari buku</span>
+      <input type="search" id="cari" placeholder="Cari judul atau penulis">
+    </label>
+    <button class="btn btn-primary" id="btn-tambah" type="button">Tambah buku</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Bacaan seru,<br>rapi di satu rak.</h1>
+        <p>Catat buku yang kamu punya, ubah kapan saja, dan temukan lagi dalam sekejap.</p>
+        <p class="count"><strong id="jumlah">0</strong> buku di rakmu</p>
+      </div>
+      <div class="stack" id="stack" aria-hidden="true"></div>
+    </section>
+
+    <section class="shelf" aria-labelledby="judul-rak">
+      <div class="shelf-head">
+        <h2 id="judul-rak">Koleksi buku</h2>
+        <label class="sort">
+          Urutkan
+          <select id="urut">
+            <option value="baru">Terbaru</option>
+            <option value="judul">Judul A–Z</option>
+            <option value="tahun">Tahun terbit</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="chips" id="chips"></div>
+      <div class="grid" id="grid"></div>
+
+      <div class="empty" id="kosong" hidden>
+        <div class="empty-art" aria-hidden="true"></div>
+        <h3 id="kosong-judul">Rakmu masih kosong</h3>
+        <p id="kosong-teks">Tambahkan buku pertamamu untuk mulai mengisi rak.</p>
+        <button class="btn btn-primary" type="button" id="btn-tambah-2">Tambah buku</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">Lembar · tugas CRUD Express, Prisma, dan Neon</footer>
+
+  <!-- Form tambah / edit -->
+  <dialog id="dlg-form">
+    <form id="form-buku" method="dialog">
+      <h2 id="form-judul">Tambah buku</h2>
+      <input type="hidden" id="id">
+      <label>Judul
+        <input type="text" id="judul" required maxlength="120" placeholder="Contoh: Laskar Pelangi">
+      </label>
+      <label>Penulis
+        <input type="text" id="penulis" required maxlength="80" placeholder="Contoh: Andrea Hirata">
+      </label>
+      <label>Tahun terbit
+        <input type="number" id="tahun" required min="1000" max="2100" placeholder="2005">
+      </label>
+      <label>Genre
+        <select id="genre"></select>
+      </label>
+      <label>Harga (Rp)
+        <input type="number" id="harga" min="0" step="1000" placeholder="89000">
+      </label>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="btn-batal">Batal</button>
+        <button type="submit" class="btn btn-primary" id="btn-simpan">Simpan buku</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Konfirmasi hapus -->
+  <dialog id="dlg-hapus">
+    <form method="dialog">
+      <h2>Hapus buku ini?</h2>
+      <p id="hapus-teks"></p>
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="hapus-batal">Batal</button>
+        <button type="button" class="btn btn-danger" id="hapus-ok">Hapus buku</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
